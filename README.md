@@ -1,75 +1,41 @@
-# React + TypeScript + Vite
+# Portafolio de Alejandro García
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portafolio personal de Alejandro García: del oficio gastronómico al desarrollo de software. Está construido con React, TypeScript y Vite.
 
-Currently, two official plugins are available:
+## Desarrollo local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Requiere Node.js 22 o superior.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Para crear el sitio estático de producción:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run build
 ```
+
+El resultado queda en `dist/`.
+
+## Publicar en GitHub Pages
+
+El repositorio ya incluye el flujo de GitHub Actions en `.github/workflows/deploy-pages.yml`. Cada `push` a `main` ejecuta las comprobaciones, genera el sitio y lo publica.
+
+Después de subir el repositorio a GitHub:
+
+1. Abre **Settings → Pages** en el repositorio.
+2. En **Build and deployment**, selecciona **GitHub Actions** como fuente.
+3. Haz `push` a la rama `main` o ejecuta el flujo manualmente desde la pestaña **Actions**.
+
+Si el repositorio se llama `AlePortfolio`, el sitio se publicará en `https://<usuario>.github.io/AlePortfolio/`. La configuración de Vite calcula esa ruta automáticamente durante el despliegue. Para un repositorio llamado `<usuario>.github.io`, usa la raíz del dominio.
+
+## Comandos disponibles
+
+| Comando | Descripción |
+| --- | --- |
+| `npm run dev` | Inicia el entorno de desarrollo. |
+| `npm run build` | Comprueba tipos y crea la versión de producción. |
+| `npm run lint` | Ejecuta las reglas de calidad. |
+| `npm run preview` | Sirve localmente el resultado de `dist/`. |
